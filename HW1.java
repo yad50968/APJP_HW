@@ -1,12 +1,12 @@
 package apjp2016;
 
 
-import java.util.Arrays;
-import java.util.EnumSet;
+import java.util.*;
 
 import apjp2016.HW1.BasicColor;
 import com.sun.org.apache.regexp.internal.RE;
 import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
 
 import static apjp2016.HW1.BasicColor.* ;
 
@@ -146,166 +146,17 @@ public class HW1 {
          * @return
          */
 
-        //兩個所共有的顏色
         public BasicColor common(BasicColor c) {
             // replace follow code by yours.
-            switch(this) {
-                case BLACK:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLACK;
-                        case GREEN:
-                            return BLACK;
-                        case CYAN:
-                            return BLACK;
-                        case RED:
-                            return BLACK;
-                        case MAGENTA:
-                            return BLACK;
-                        case YELLOW:
-                            return BLACK;
-                        case WHITE:
-                            return BLACK;
-                    }
-                case BLUE:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLUE;
-                        case GREEN:
-                            return BLACK;
-                        case CYAN:
-                            return BLUE;
-                        case RED:
-                            return BLACK;
-                        case MAGENTA:
-                            return BLUE;
-                        case YELLOW:
-                            return BLACK;
-                        case WHITE:
-                            return BLUE;
-                    }
-                case GREEN:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLACK;
-                        case GREEN:
-                            return GREEN;
-                        case CYAN:
-                            return GREEN;
-                        case RED:
-                            return BLACK;
-                        case MAGENTA:
-                            return BLACK;
-                        case YELLOW:
-                            return GREEN;
-                        case WHITE:
-                            return GREEN;
-                    }
-                case CYAN:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLUE;
-                        case GREEN:
-                            return GREEN;
-                        case CYAN:
-                            return CYAN;
-                        case RED:
-                            return BLACK;
-                        case MAGENTA:
-                            return BLUE;
-                        case YELLOW:
-                            return GREEN;
-                        case WHITE:
-                            return CYAN;
-                    }
-                case RED:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLACK;
-                        case GREEN:
-                            return BLACK;
-                        case CYAN:
-                            return BLACK;
-                        case RED:
-                            return RED;
-                        case MAGENTA:
-                            return RED;
-                        case YELLOW:
-                            return RED;
-                        case WHITE:
-                            return RED;
-                    }
-                case MAGENTA:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLUE;
-                        case GREEN:
-                            return BLACK;
-                        case CYAN:
-                            return BLUE;
-                        case RED:
-                            return RED;
-                        case MAGENTA:
-                            return MAGENTA;
-                        case YELLOW:
-                            return RED;
-                        case WHITE:
-                            return MAGENTA;
-                    }
-                case YELLOW:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLACK;
-                        case GREEN:
-                            return GREEN;
-                        case CYAN:
-                            return GREEN;
-                        case RED:
-                            return RED;
-                        case MAGENTA:
-                            return RED;
-                        case YELLOW:
-                            return YELLOW;
-                        case WHITE:
-                            return YELLOW;
-                    }
-                case WHITE:
-                    switch (c) {
-                        case BLACK:
-                            return BLACK;
-                        case BLUE:
-                            return BLUE;
-                        case GREEN:
-                            return GREEN;
-                        case CYAN:
-                            return CYAN;
-                        case RED:
-                            return RED;
-                        case MAGENTA:
-                            return MAGENTA;
-                        case YELLOW:
-                            return YELLOW;
-                        case WHITE:
-                            return WHITE;
-                    }
+            int r=0;
+            int g=0;
+            int b=0;
 
-            }
-            return null;
+            if(this.getRed() == c.getRed() && c.getRed() == 255) r = 255;
+            if(this.getGreen() == c.getGreen() && c.getGreen() == 255) g = 255;
+            if(this.getBlue() == c.getBlue() && c.getBlue() ==255) b = 255;
 
+            return getColor(r,g,b);
 
         }
 
@@ -319,7 +170,15 @@ public class HW1 {
          */
         public BasicColor exclusiveOr(BasicColor c) {
             // replace follow code by yours.
-            return BLACK;
+            int r=0;
+            int g=0;
+            int b = 0;
+            if(this.getRed() != c.getRed()) r = 255;
+            if(this.getGreen() != c.getGreen()) g = 255;
+            if(this.getBlue() != c.getBlue()) b = 255;
+
+
+            return getColor(r,g,b);
         }
 
         /**
@@ -331,7 +190,17 @@ public class HW1 {
          */
         public BasicColor mixedWith(BasicColor c) {
             // replace follow code by yours.
-            return BLACK;
+
+            int r,g,b;
+            r = this.r + c.r;
+            g = this.g + c.g;
+            b = this.b + c.b;
+
+            if(r>255)r = 255;
+            if(g>255)g = 255;
+            if(b>255)b = 255;
+
+            return getColor(r,g,b);
         }
 
         /**
@@ -345,7 +214,24 @@ public class HW1 {
          */
         public static BasicColor combine(BasicColor... colors) {
             // replace follow code by yours.
-            return BLACK;
+            if (colors.length == 0) return BLACK;
+
+
+            int r=0;
+            int g=0;
+            int b=0;
+
+            for(BasicColor c : colors){
+                r = r+c.getRed();
+                g = g+c.getGreen();
+                b = b+c.getBlue();
+            }
+
+            if(r>255)r = 255;
+            if(g>255)g = 255;
+            if(b>255)b = 255;
+            return getColor(r,g,b);
+
 
         }
 
@@ -360,9 +246,27 @@ public class HW1 {
          */
         public static BasicColor getColor(int r, int g, int b){
             // replace follow code by yours.
+            if(r == 0 && g == 0 && b ==0){
+                return BLACK;
+            }else if(r == 0 && g == 0 && b ==255){
+                return BLUE;
+            }else if(r == 0 && g == 255 && b ==0){
+                return GREEN;
+            }else if(r == 0 && g == 255 && b ==255){
+                return CYAN;
+            }else if(r == 255 && g == 0 && b ==0){
+                return RED;
+            }else if(r == 255 && g == 255 && b ==0){
+                return YELLOW;
+            }else if(r == 255 && g == 0 && b ==255){
+                return MAGENTA;
+            }else if(r == 255 && g == 255 && b ==255){
+                return WHITE;
+            }
             return null;
 
         }
+
 
         /**
          * Return an array containing all BasicColors sorted in ascending order
@@ -381,9 +285,9 @@ public class HW1 {
                 throw new IllegalArgumentException();
             }
 
-            // Replace following code by yours
-            return null ;
-
+            BasicColor[] ans = {BLACK,p3,p2,p3.mixedWith(p2),p1,p1.mixedWith(p3),p1.mixedWith(p2),WHITE};
+            return ans;
+            
         }
 
         /**
