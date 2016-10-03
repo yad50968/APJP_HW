@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.EnumSet;
 
 import apjp2016.HW1.BasicColor;
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 
 import static apjp2016.HW1.BasicColor.* ;
 
 public class HW1 {
-
     /**
      * It is well known that a color may be represented as a composition of 3
      * primary colors: (red, green,blue). Suppose each primary color component
@@ -32,8 +33,8 @@ public class HW1 {
         // BLACK(?), RED(?), BLUE(), GREEN(), CYAN(), MAGENTA(), YELLOW(),
         // WHITE(),;
         // replace the following code with yours!
-        BLACK(0, 0, 0), BLUE(0, 0, 0), GREEN(0, 0, 0), CYAN(0, 0, 0), RED(0, 0, 0), MAGENTA(0, 0,
-                0), YELLOW(0, 0, 0), WHITE(255, 255, 255);
+        BLACK(0, 0, 0), BLUE(0, 0, 255), GREEN(0, 255, 0), CYAN(0, 255, 255), RED(255, 0, 0), MAGENTA(255, 0,
+                255), YELLOW(255, 255, 0), WHITE(255, 255, 255);
 
         // rgb = r<<24 + g << 16 + b << 8 where r,g and b are an integer in [0,
         // 255]
@@ -42,13 +43,18 @@ public class HW1 {
         // internal color value would be negative if the basic color contains
         // red(=255) color.
         private int rgb;
+        private int r;
+        private int g;
+        private int b;
 
         private static final int NO_PRIMARY_COLORS = 8;
 
         private BasicColor(int r, int g, int b) {
             // Replace the following code by yours!
-            rgb = 0;
-
+            rgb = r << 24 + g << 16 + b << 8;
+            this.r = r;
+            this.g = g;
+            this.b = b;
 
 
             // Don't change following code!
@@ -68,7 +74,7 @@ public class HW1 {
          */
         public int getRed() {
             // replace the following code by yours!
-            return 0;
+            return this.r;
         }
 
         /**
@@ -77,7 +83,7 @@ public class HW1 {
          */
         public int getGreen() {
             // replace the following code by yours!
-            return 0;
+            return this.g;
         }
 
         /**
@@ -85,7 +91,7 @@ public class HW1 {
          */
         public int getBlue() {
             // replace the following code by yours!
-            return 0;
+            return this.b;
         }
 
         /**
@@ -104,8 +110,31 @@ public class HW1 {
          * @return the complement color of this color.
          */
         public BasicColor complement() {
+
+
+
+            if(this == BLACK){
+                return WHITE;
+            }else if(this == BLUE){
+                return YELLOW;
+            }else if(this == GREEN){
+                return MAGENTA;
+            }else if(this == CYAN){
+                return RED;
+            }else if(this == RED){
+                return CYAN;
+            }else if(this == MAGENTA){
+                return GREEN;
+            }else if(this == YELLOW){
+                return BLUE;
+            }else if(this == WHITE){
+                return BLACK;
+            }else{
+                return null;
+            }
+
+
             // replace the following code by yours!
-            return BLACK;
         }
 
         /**
@@ -116,9 +145,167 @@ public class HW1 {
          *            another BasicColor
          * @return
          */
+
+        //兩個所共有的顏色
         public BasicColor common(BasicColor c) {
             // replace follow code by yours.
-            return BLACK;
+            switch(this) {
+                case BLACK:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLACK;
+                        case GREEN:
+                            return BLACK;
+                        case CYAN:
+                            return BLACK;
+                        case RED:
+                            return BLACK;
+                        case MAGENTA:
+                            return BLACK;
+                        case YELLOW:
+                            return BLACK;
+                        case WHITE:
+                            return BLACK;
+                    }
+                case BLUE:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLUE;
+                        case GREEN:
+                            return BLACK;
+                        case CYAN:
+                            return BLUE;
+                        case RED:
+                            return BLACK;
+                        case MAGENTA:
+                            return BLUE;
+                        case YELLOW:
+                            return BLACK;
+                        case WHITE:
+                            return BLUE;
+                    }
+                case GREEN:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLACK;
+                        case GREEN:
+                            return GREEN;
+                        case CYAN:
+                            return GREEN;
+                        case RED:
+                            return BLACK;
+                        case MAGENTA:
+                            return BLACK;
+                        case YELLOW:
+                            return GREEN;
+                        case WHITE:
+                            return GREEN;
+                    }
+                case CYAN:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLUE;
+                        case GREEN:
+                            return GREEN;
+                        case CYAN:
+                            return CYAN;
+                        case RED:
+                            return BLACK;
+                        case MAGENTA:
+                            return BLUE;
+                        case YELLOW:
+                            return GREEN;
+                        case WHITE:
+                            return CYAN;
+                    }
+                case RED:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLACK;
+                        case GREEN:
+                            return BLACK;
+                        case CYAN:
+                            return BLACK;
+                        case RED:
+                            return RED;
+                        case MAGENTA:
+                            return RED;
+                        case YELLOW:
+                            return RED;
+                        case WHITE:
+                            return RED;
+                    }
+                case MAGENTA:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLUE;
+                        case GREEN:
+                            return BLACK;
+                        case CYAN:
+                            return BLUE;
+                        case RED:
+                            return RED;
+                        case MAGENTA:
+                            return MAGENTA;
+                        case YELLOW:
+                            return RED;
+                        case WHITE:
+                            return MAGENTA;
+                    }
+                case YELLOW:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLACK;
+                        case GREEN:
+                            return GREEN;
+                        case CYAN:
+                            return GREEN;
+                        case RED:
+                            return RED;
+                        case MAGENTA:
+                            return RED;
+                        case YELLOW:
+                            return YELLOW;
+                        case WHITE:
+                            return YELLOW;
+                    }
+                case WHITE:
+                    switch (c) {
+                        case BLACK:
+                            return BLACK;
+                        case BLUE:
+                            return BLUE;
+                        case GREEN:
+                            return GREEN;
+                        case CYAN:
+                            return CYAN;
+                        case RED:
+                            return RED;
+                        case MAGENTA:
+                            return MAGENTA;
+                        case YELLOW:
+                            return YELLOW;
+                        case WHITE:
+                            return WHITE;
+                    }
+
+            }
+            return null;
+
 
         }
 
@@ -328,7 +515,7 @@ public class HW1 {
         BasicColor[] cs = BasicColor.values();
         for (int k = 0; k < BasicColor.values().length; k++) {
             if (rlt[k] != cs[k].getRed()) {
-                error("the red value: " + cs[k].getRed() + " of " + cs[k] + "is not correct!");
+                error("the red value: " + rlt[k] +" "+ cs[k].getRed() + " of " + cs[k] + "is not correct!");
             }
         }
     }
