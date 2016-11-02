@@ -212,12 +212,12 @@ public class HW3 {
 	 * But YOU CANNOT USE stream API in this implementation.
 	 * 
 	 * @param list
-	 * @param collector
+	 * @param col
 	 *            a collector of type Collector<T,A,R>
 	 * @return a value of type R.
 	 */
 
-	public static <T, A, R> R collect(List<T> list, Collector<T, A, R> collector) {
+	public static <T, A, R> R collect(List<T> list, Collector<T, A, R> col) {
 		// The result should be equivalent to the code:
 		// list.stream().collect(col) ;
 		// but YOU CANNOT USE this stream API in this implementation.
