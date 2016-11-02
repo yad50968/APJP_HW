@@ -1,11 +1,8 @@
 package apjp2016;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.sun.tools.javac.util.StringUtils;
+
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -48,6 +45,13 @@ public class HW3 {
 
 		// sort non-null nWords in place using Collections.sort
 		// Put your code here! ...
+		Collections.sort(nWords, (o1, o2) -> {
+            if(o1.length() == o2.length()) {
+                return o1.compareTo(o2);
+            }else{
+                return o1.length() - o2.length();
+            }
+    	});
 
 		return nWords;
 
@@ -63,6 +67,13 @@ public class HW3 {
 
 		// sort non-null nWords IN PLACE using Collections.sort
 		// Put your code here! ...
+		Collections.sort(nWords, (o1, o2) -> {
+			if(o1.length() == o2.length()) {
+				return o1.compareTo(o2);
+			}else{
+				return o2.length() - o1.length();
+			}
+		});
 
 		return nWords;
 	}
@@ -77,7 +88,15 @@ public class HW3 {
 
 		// sort non-null nWords IN PLACE using Collections.sort
 		// Put your code here! ...
-
+		Collections.sort(nWords, (o1, o2) -> {
+			int o1c = 0;
+			int o2c = 0;
+			for(char c : cs){
+				o1c += o1.chars().filter(ch -> ch == c).count();
+				o2c += o2.chars().filter(ch -> ch == c).count();
+			}
+			return o1c - o2c;
+		});
 		return nWords;
 	}
 
@@ -187,7 +206,7 @@ public class HW3 {
 	 * But YOU CANNOT USE stream API in this implementation.
 	 * 
 	 * @param list
-	 * @param col
+	 * @param collector
 	 *            a collector of type Collector<T,A,R>
 	 * @return a value of type R.
 	 */
