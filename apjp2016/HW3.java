@@ -114,8 +114,14 @@ public class HW3 {
 	 */
 	public static <T> boolean someButNotAllMatch(List<T> list, Predicate<? super T> pred) {
 
-		// Put your code here! ...
-
+		int r=0 ,f = 0;
+		for(T c : list){
+			if(pred.test(c))
+				r++;
+			else
+				f++;
+			if(r>1 && f>1)return true;
+		}
 		return false;
 	}
 
