@@ -1,0 +1,40 @@
+
+>>> Sort strings in words by length first and by lexicogrphical order secondly:
+>>> words = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more, pressure, and, stress, than, men, when, they, work, long, hours, Work, for, women, is, also, less, satisfying, due, to, the, need, to, balance, demands, at, work, and, family, obligations]
+ result: [a, at, at, is, of, on, to, to, to, The, and, and, and, due, for, may, men, the, Work, also, face, home, less, long, more, need, said, take, tend, than, that, they, when, work, work, hours, share, women, women, bigger, family, stress, balance, demands, pressure, satisfying, obligations, researchers, responsibilities]
+
+>>> Sort strings in words by length in decreasing order:
+>>> words = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more, pressure, and, stress, than, men, when, they, work, long, hours, Work, for, women, is, also, less, satisfying, due, to, the, need, to, balance, demands, at, work, and, family, obligations]
+result: [responsibilities, researchers, obligations, satisfying, pressure, balance, demands, bigger, stress, family, women, share, hours, women, said, that, tend, take, home, face, more, than, when, they, work, long, Work, also, less, need, work, The, and, may, and, men, for, due, the, and, to, on, of, at, is, to, to, at, a]
+
+>>> Sort strings in words by the number of occurrences of 'm', 'o' and 'e': 
+>>> words = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more, pressure, and, stress, than, men, when, they, work, long, hours, Work, for, women, is, also, less, satisfying, due, to, the, need, to, balance, demands, at, work, and, family, obligations]
+result: [said, that, a, at, and, and, than, is, satisfying, at, and, The, tend, to, take, on, bigger, share, of, may, face, stress, when, they, work, long, hours, Work, for, also, less, due, to, the, to, balance, work, family, pressure, men, need, demands, obligations, researchers, women, responsibilities, home, more, women]
+
+>>> There is some string but not all strings in words whose length is in [1,10):
+>>> words = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more, pressure, and, stress, than, men, when, they, work, long, hours, Work, for, women, is, also, less, satisfying, due, to, the, need, to, balance, demands, at, work, and, family, obligations]
+true
+
+>>> There is some string but not all strings in words whose length is in [1,20):
+>>> words = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more, pressure, and, stress, than, men, when, they, work, long, hours, Work, for, women, is, also, less, satisfying, due, to, the, need, to, balance, demands, at, work, and, family, obligations]
+false
+
+>>> There is some string but not all strings in words2 contains '5' :
+>>> words2 = [2100, 1300, 210, 410, 77, 818, 1001, 61, 57, 901]
+false
+
+>>> Map word in words1 to upperCase:
+>>> words1 = [The, researchers, said, that, women, tend, to, take, on, a, bigger, share, of, responsibilities, at, home, and, may, face, more]
+[THE, RESEARCHERS, SAID, THAT, WOMEN, TEND, TO, TAKE, ON, A, BIGGER, SHARE, OF, RESPONSIBILITIES, AT, HOME, AND, MAY, FACE, MORE]
+
+>>> flatMap word in words2 to character list:
+>>> words2 = [2100, 1300, 210, 410, 77, 818, 1001, 61, 57, 901]
+[2, 1, 0, 0, 1, 3, 0, 0, 2, 1, 0, 4, 1, 0, 7, 7, 8, 1, 8, 1, 0, 0, 1, 6, 1, 5, 7, 9, 0, 1]
+
+>>> partition word in words2 into two list depending on whether its length>2:
+>>> worsd2 = [2100, 1300, 210, 410, 77, 818, 1001, 61, 57, 901]
+{false=[77, 61, 57], true=[2100, 1300, 210, 410, 818, 1001, 901]}
+
+>>> group strings in words2 according to their length:
+>>> worsd2 = [2100, 1300, 210, 410, 77, 818, 1001, 61, 57, 901]
+{2=[77, 61, 57], 3=[210, 410, 818, 901], 4=[2100, 1300, 1001]}
