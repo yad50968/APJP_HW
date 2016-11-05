@@ -54,6 +54,7 @@ public class HW3 {
                 return o1.length() - o2.length();
             }
     	});
+
 		return nWords;
 
 	}
@@ -88,7 +89,7 @@ public class HW3 {
 
 		// sort non-null nWords IN PLACE using Collections.sort
 		// Put your code here! ...
-		Collections.sort(nWords, (o1, o2) -> {
+		nWords.sort((o1, o2) -> {
 			int o1c = 0;
 			int o2c = 0;
 			for(char c : cs){
@@ -115,12 +116,13 @@ public class HW3 {
 	public static <T> boolean someButNotAllMatch(List<T> list, Predicate<? super T> pred) {
 
 		int r=0 ,f = 0;
+
 		for(T c : list){
 			if(pred.test(c))
 				r++;
 			else
 				f++;
-			if(r>1 && f>1)return true;
+			if(r>0 && f>0)return true;
 		}
 		return false;
 	}
@@ -166,9 +168,7 @@ public class HW3 {
 		// list.stream().flatMap(f) ;
 		// but YOU CANNOT USE this stream API in this implementation.
 		List<R> rlt = new ArrayList<>();
-		list.forEach(t -> f.apply(t).forEach(r -> rlt.add(r)));
-
-
+		list.forEach(t -> f.apply(t).forEach(rlt::add));
 		return rlt;
 	}
 
@@ -194,11 +194,11 @@ public class HW3 {
 		// list.stream().collect(Collectors.partitoningBy(p)) ;
 		// but YOU CANNOT USE this stream API in this implementation.
 		Map<Boolean, List<T>> rlt = new HashMap<>();
-		List<T> t = new ArrayList<T>();
-		List<T> f = new ArrayList<T>();
-		list.forEach(h -> {if(p.test(h) == true){t.add(h);} else{f.add(h);}});
-		rlt.put(true,t);
-		rlt.put(false,f);
+		List<T> t = new ArrayList<>();
+		List<T> f = new ArrayList<>();
+		list.forEach(h -> {if(p.test(h)){t.add(h);} else{f.add(h);}});
+		rlt.put(Boolean.TRUE,t);
+		rlt.put(Boolean.FALSE,f);
 		return rlt;
 	}
 
@@ -222,6 +222,7 @@ public class HW3 {
 		// The result should be equivalent to the code:
 		// list.stream().collect(col) ;
 		// but YOU CANNOT USE this stream API in this implementation.
+
 		A result = col.supplier().get();
 		list.forEach(t -> col.accumulator().accept(result, t));
 		return col.finisher().apply(result);
