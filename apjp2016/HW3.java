@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import static java.lang.System.out;
 
+
+
 /**
  * Implement all methods given in this class using lambda expressions.
  * 
@@ -52,7 +54,6 @@ public class HW3 {
                 return o1.length() - o2.length();
             }
     	});
-
 		return nWords;
 
 	}
@@ -74,7 +75,6 @@ public class HW3 {
 				return o2.length() - o1.length();
 			}
 		});
-
 		return nWords;
 	}
 
@@ -143,9 +143,7 @@ public class HW3 {
 	public static <T, U> List<U> map(List<T> list, Function<? super T, ? extends U> f) {
 
 		List<U> rlt = new ArrayList<>();
-
-		// Put your code here! ...
-
+		list.forEach(t -> rlt.add(f.apply(t)));
 		return rlt;
 	}
 
@@ -168,8 +166,8 @@ public class HW3 {
 		// list.stream().flatMap(f) ;
 		// but YOU CANNOT USE this stream API in this implementation.
 		List<R> rlt = new ArrayList<>();
+		list.forEach(t -> f.apply(t).forEach(r -> rlt.add(r)));
 
-		// Put your code here! ...
 
 		return rlt;
 	}
@@ -196,8 +194,11 @@ public class HW3 {
 		// list.stream().collect(Collectors.partitoningBy(p)) ;
 		// but YOU CANNOT USE this stream API in this implementation.
 		Map<Boolean, List<T>> rlt = new HashMap<>();
-
-		// Put your code here! ...
+		List<T> t = new ArrayList<T>();
+		List<T> f = new ArrayList<T>();
+		list.forEach(h -> {if(p.test(h) == true){t.add(h);} else{f.add(h);}});
+		rlt.put(true,t);
+		rlt.put(false,f);
 		return rlt;
 	}
 
@@ -221,10 +222,9 @@ public class HW3 {
 		// The result should be equivalent to the code:
 		// list.stream().collect(col) ;
 		// but YOU CANNOT USE this stream API in this implementation.
-
-		// Put your code here! ...
-
-		return null;
+		A result = col.supplier().get();
+		list.forEach(t -> col.accumulator().accept(result, t));
+		return col.finisher().apply(result);
 	}
 
 	public static void selfTest() {
