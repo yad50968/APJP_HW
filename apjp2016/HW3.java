@@ -49,7 +49,7 @@ public class HW3 {
 		// Put your code here! ...
 		Collections.sort(nWords, (o1, o2) -> {
             if(o1.length() == o2.length()) {
-                return o1.compareTo(o2);
+                return (o1.compareTo(o2));
             }else{
                 return o1.length() - o2.length();
             }
@@ -70,11 +70,8 @@ public class HW3 {
 		// sort non-null nWords IN PLACE using Collections.sort
 		// Put your code here! ...
 		Collections.sort(nWords, (o1, o2) -> {
-			if(o1.length() == o2.length()) {
-				return o1.compareTo(o2);
-			}else{
+
 				return o2.length() - o1.length();
-			}
 		});
 		return nWords;
 	}
@@ -252,7 +249,7 @@ public class HW3 {
 
 		out.println("\n>>> There is some string but not all strings in words2 contains '5' :");
 		out.println(">>> words2 = " + words2);
-		out.println(someButNotAllMatch(words2, w -> w.contains("o")));
+		out.println(someButNotAllMatch(words2, w -> w.contains("5")));
 
 		out.println("\n>>> Map word in words1 to upperCase:");
 		out.println(">>> words1 = " + words1);
