@@ -4,10 +4,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 
-//import apjp2016.HW2Solution.PQueue;
-//import apjp2016.HW2Solution.Pair;
-//import apjp2016.HW2Solution.Table;
-//import apjp2016.HW2Solution.Test;
+
 public class HW2 {
 
     public static void main(String[] args) {
